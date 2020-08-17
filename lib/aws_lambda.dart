@@ -28,6 +28,7 @@ class AWSLambda {
   ///   or [Map] depending on what the lambda function takes as an input
   ///   parameter. If the lambd function takes no input parameter at all, just
   ///   do not pass [parameters].
+  ///
   /// Return:
   /// * If [callLambda] is called with a [Uint8List] as [parameters] value the
   ///   lambda function is called with a byte array parameter and expected to
@@ -55,6 +56,10 @@ class AWSLambda {
         throw FormatException("Unsupported parameter type");
       }
     }
-    return await platform.invokeMethod(functionName, pass);
+    dynamic ret = await platform.invokeMethod(functionName, pass);
+    if (ret is Map && ret.runtimeType != Map) {
+      ret = Map<String, dynamic>.from(ret);
+    }
+    return ret;
   }
 }
