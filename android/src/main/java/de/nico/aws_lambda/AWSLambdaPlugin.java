@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.lambdainvoker.LambdaFunctionException;
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.mobileconnectors.lambdainvoker.LambdaInvokerFactory;
 import com.amazonaws.regions.Regions;
 
@@ -172,6 +173,12 @@ public class AWSLambdaPlugin implements FlutterPlugin, MethodCallHandler {
                   "EXCEPTION",
                   "The lambda operation failed",
                   lfe.getDetails()
+          );
+        } catch (AmazonServiceException ase) {
+          runnable = () -> result.error(
+                  "EXCEPTION",
+                  "The lambda operation failed",
+                  ase.getErrorMessage()
           );
         }
         mainHandler.post(runnable);
