@@ -1,11 +1,11 @@
 name: aws_lambda
 description: A flutter plugin made to allow the usage of aws lambdas via each platform's native aws lambda plugin.
 version: 0.0.1
-author: Nico Feulner
+repository: "https://github.com/nico151999/flutter_aws_lambda"
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.17.0 <2.0.0"
+  flutter: ">=1.20.0 <2.0.0"
 
 dependencies:
   flutter:
